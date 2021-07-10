@@ -1,0 +1,119 @@
+﻿Vehicle Class
+
+    FuelLevel Property
+        This property validates the fuelLevel value based on whether the Vehicle is TwoWheeler or a FourWheeler.
+
+         If the vehicle is TwoWheeler the maximum value can be 10.
+
+         If the vehicle is FourWheeler the maximum value can be 50.
+
+        If the value being set is greater than the maximum value permissible, the fuelLevel is set to the maximum value.
+
+        Otherwise the fuelLevel is set the value passed.
+
+    Parameterized  Constructor
+        The properties should be initialized appropriately.
+
+    FixBrakes()
+        If the brakes are not working, this method sets areBrakesWorking to true and returns true.
+
+        Otherwise false is returned.
+
+FourWheeler Class
+
+    EngineCoolantLevel Property
+        This property validates the engineCoolantLevel.
+
+            If the value passed is ‘H’ or ‘M’ or ‘L’ engineCoolantLevel is set to the passed value
+
+            Otherwise the engineCoolantLevel is set to ‘H’.
+
+    Parameterized  Constructor
+        The inherited properties should be set by invoking the base class constructor.
+
+        The properties of FourWheeler Class should be initialized.
+
+    
+
+    FixEngineCoolantLevel()
+        If the EngineCoolantLevel is not ‘H’, set to ‘H’ and return true.
+
+        Otherwise return false.
+
+    UpdateVehicleStatus()
+        This method is used to update the vehicle status.
+
+            If the EngineCoolantLevel is ‘L’ or the brakes are not working set the VehicleStatus to “Critical”.
+
+            Otherwise the VehicleStatus is set to “OK”.
+
+    RefuelVehicle()
+        This method accepts the volume of fuel to be refilled.
+
+             If the sum of FuelLevel and volume of fuel to be refilled exceeds the capacity (50) then a FuelOverflowException should be raised and caught inside the method.In this case set volume of fuel to be refilled as 0.
+
+             FuelLevel should be updated with the volume of fuel to be refilled.
+
+TwoWheeler Class
+
+    ChainTension Property
+        This property validates the chainTension.
+
+            If the value passed is between 1 and 9(inclusive of both), the chainTension is set to the passed value.
+
+            Otherwise the chainTension is set to 7.
+
+    Parameterized  Constructor
+        The inherited properties should be set by invoking the base class constructor.
+
+        The properties of TwoWheeler Class should be initialized.
+
+    FixChainTension()
+        If the ChainTension is not 7, set to 7 and return true.
+
+        Otherwise return false.
+
+    UpdateVehicleStatus()
+        This method is used to update the vehicle status.
+
+            If the chainTension deviates from 7 by more than 2 or if the brakes are not working set the VehicleStatus to “Critical”.
+
+            Otherwise the VehicleStatus is set to “OK”.
+
+    RefuelVehicle()
+        This method accepts the volume of fuel to be refilled.
+
+            If the sum of FuelLevel and volume of fuel to be refilled exceeds the capacity (10) then a FuelOverflowException should be raised and caught inside the method.In this case set volume of fuel to be refilled as 0.
+
+            FuelLevel should be updated with the volume of fuel to be refilled.
+
+Maintenance Class
+
+    RefuelVehicle()
+        This method accepts the Vehicle object and the volumeToBeFilled parameter .
+
+            Invoke RefuelVehicle method of the Vehicle by passing volumeToBeFilled as a parameter to update the FuelLevel.
+
+            Check whether the FuelLevel before update and FuelLevel after update is same. 
+
+                If it is same, volumeToBeFilled is set as 0.
+
+            The MaintenanceCharges is increased by value volumeToBeFilled * 70. 
+
+    ServiceVehicle()
+        This method accepts a Vehicle type and performs the following procedure on it.
+
+            The vehicle status is updated by calling its UpdateVehicleStatus method.
+
+            If the updated VehicleStatus is 'Critical',
+
+                The FixBrakes method of the vehicle is invoked. If the method returns true the MaintenanceCharges are increased by 20.50.
+
+                Check whether the vehicle is TwoWheeler or FourWheeler.
+
+                    If the vehicle is a TwoWheeler call its FixChainTension method. If it returns true increase MaintenanceCharges by 30.75.
+
+                    If the vehicle is a FourWheeler call its FixEngineCoolantLevel method. If it returns true increase MaintenanceCharges by 50.20.
+
+                Set the VehicleStatus to 'OK'
+
