@@ -18,7 +18,9 @@ namespace BusinessAccessLayer.TryOut_2
         }
         public Usage(int dataUsage, int callDurationInMins, int numberOfSmsSent)
         {
-
+            DataUsageInGB = dataUsage;
+            CallDurationInMins = callDurationInMins;
+            NumberOfSmsSent = numberOfSmsSent;
         }
     }
 }

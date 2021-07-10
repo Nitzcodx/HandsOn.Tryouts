@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessAccessLayer.Enums;
 
 namespace BusinessAccessLayer.TryOut_2
 {
@@ -17,11 +18,19 @@ namespace BusinessAccessLayer.TryOut_2
         }
         public ServiceCenter(long phoneNumber, string locationId)
         {
-
+            PhoneNumber = phoneNumber;
+            LocationId = locationId;
         }
 
-        public virtual int MakePayment(double amountPaid, out string billId, bool notifyBySms){}
+        public virtual int MakePayment(double amountPaid, out string billId, bool notifyBySms)
+        {
+            billId = null;
+            return 0;
+        }
 
-        public virtual bool ValidatePlanDetails(List<string> availablePostPaidPlans) { }
+        public virtual bool ValidatePlanDetails(List<PostPaidPlan> availablePostPaidPlans)
+        {
+            return false;
+        }
     }
 }

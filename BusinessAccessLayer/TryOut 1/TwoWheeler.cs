@@ -21,7 +21,7 @@ namespace BusinessAccessLayer.TryOut_1
             {
                 if (
                     value >= TwoWheelerConstants.MinChainTension &&
-                    value <= TwoWheelerConstants.MinChainTension
+                    value <= TwoWheelerConstants.MaxChainTension
                    )    chainTension = value;
                 else chainTension = TwoWheelerConstants.OptimumChainTension;
             }

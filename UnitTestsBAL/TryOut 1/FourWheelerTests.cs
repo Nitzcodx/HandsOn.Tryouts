@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessAccessLayer.Enums;
 
 namespace BusinessAccessLayer.TryOut_1.Tests
 {
@@ -58,12 +59,12 @@ namespace BusinessAccessLayer.TryOut_1.Tests
         public void UpdateVehicleStatusTest()
         {
             testCar.UpdateVehicleStatus();
-            string expectedStatus = "Critical";
+            VehicleStatus expectedStatus = VehicleStatus.Critical;
             Assert.AreEqual(expectedStatus, testCar.VehicleStatus);
             testCar.FixBrakes();
             testCar.FixEngineCoolantLevel();
             testCar.UpdateVehicleStatus();
-            expectedStatus = "OK";
+            expectedStatus = VehicleStatus.OK;
             Assert.AreEqual(expectedStatus, testCar.VehicleStatus);
         }
 
