@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessAccessLayer.Constants;
+using BusinessAccessLayer.Enums;
 
 namespace BusinessAccessLayer.TryOut_1
 {
@@ -17,8 +19,11 @@ namespace BusinessAccessLayer.TryOut_1
             }
             set
             {
-                if (value >= 1 && value <= 9) chainTension = value;
-                else chainTension = 7;
+                if (
+                    value >= TwoWheelerConstants.MinChainTension &&
+                    value <= TwoWheelerConstants.MinChainTension
+                   )    chainTension = value;
+                else chainTension = TwoWheelerConstants.OptimumChainTension;
             }
         }
 
@@ -32,9 +37,9 @@ namespace BusinessAccessLayer.TryOut_1
         }
         public bool FixChainTension()
         {
-            if (ChainTension != 7)
+            if (ChainTension != TwoWheelerConstants.OptimumChainTension)
             {
-                ChainTension = 7;
+                ChainTension = TwoWheelerConstants.OptimumChainTension;
                 return true;
             }
             return false;
@@ -44,7 +49,7 @@ namespace BusinessAccessLayer.TryOut_1
         {
             try
             {
-                if (FuelLevel + fuelVolume > 10)
+                if (FuelLevel + fuelVolume > VehicleConstants.TwoWheelerMaxFuelLevel)
                     throw new Exceptions.FuelOverflowException();
                 else
                     FuelLevel += fuelVolume;
@@ -58,8 +63,11 @@ namespace BusinessAccessLayer.TryOut_1
 
         public override void UpdateVehicleStatus()
         {
-            if (ChainTension > 9 || !(AreBrakesWorking)) VehicleStatus = "Critical";
-            else VehicleStatus = "OK";
+            if (
+                ChainTension > TwoWheelerConstants.MaxChainTension ||
+                !(AreBrakesWorking)
+               )    VehicleStatus = VehicleStatus.Critical;
+            else VehicleStatus = VehicleStatus.OK;
         }
     }
 }

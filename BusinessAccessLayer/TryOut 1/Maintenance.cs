@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessAccessLayer.Constants;
+using BusinessAccessLayer.Enums;
 
 namespace BusinessAccessLayer.TryOut_1
 {
@@ -19,14 +21,14 @@ namespace BusinessAccessLayer.TryOut_1
             float initialVolume = vehicle.FuelLevel;
             vehicle.RefuelVehicle(volumeToBeFilled);
             if (initialVolume == vehicle.FuelLevel) volumeToBeFilled = 0;
-            MaintenanceCharges += volumeToBeFilled * 70;
+            MaintenanceCharges += volumeToBeFilled * MaintainenceConstants.ChargePerVolumeFuel;
         }
         public void ServiceVehicle(Vehicle vehicle)
         {
             vehicle.UpdateVehicleStatus();
-            if (vehicle.VehicleStatus.Equals("Critical"))
+            if (vehicle.VehicleStatus.Equals(VehicleStatus.Critical))
             {
-                if (vehicle.FixBrakes()) MaintenanceCharges += 20.5;
+                if (vehicle.FixBrakes()) MaintenanceCharges += MaintainenceConstants.BrakeFixingCharge;
                 FixVehicle fix = null;
                 if(vehicle is TwoWheeler)
                 {
@@ -37,8 +39,10 @@ namespace BusinessAccessLayer.TryOut_1
                     fix = new FixVehicle(((FourWheeler)vehicle).FixEngineCoolantLevel);
                 }
                 if (fix())
-                    MaintenanceCharges += (vehicle is TwoWheeler) ? 20.5 : 30.75;
-                vehicle.VehicleStatus = "OK";
+                    MaintenanceCharges += (vehicle is TwoWheeler) ? 
+                                            MaintainenceConstants.ChainTensionFixCharge :
+                                            MaintainenceConstants.EngineCoolantFixCharge;
+                vehicle.VehicleStatus = VehicleStatus.OK;
             }
         }
     }

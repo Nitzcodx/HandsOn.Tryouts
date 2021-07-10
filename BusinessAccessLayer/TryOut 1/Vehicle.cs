@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessAccessLayer.Constants;
 
 namespace BusinessAccessLayer.TryOut_1
 {
@@ -22,15 +23,15 @@ namespace BusinessAccessLayer.TryOut_1
             {
                 if(this is FourWheeler)
                 {
-                    fuelLevel = value > 50 ? 50 : value;
+                    fuelLevel = value > VehicleConstants.FourWheelerMaxFuelLevel ? VehicleConstants.FourWheelerMaxFuelLevel : value;
                 }
                 if(this is TwoWheeler)
                 {
-                    fuelLevel = value > 10 ? 10 : value;
+                    fuelLevel = value > VehicleConstants.TwoWheelerMaxFuelLevel ? VehicleConstants.TwoWheelerMaxFuelLevel : value;
                 }
             }
         }
-        public string VehicleStatus { get; set; }
+        public Enums.VehicleStatus VehicleStatus { get; set; }
 
         public Vehicle()
         {

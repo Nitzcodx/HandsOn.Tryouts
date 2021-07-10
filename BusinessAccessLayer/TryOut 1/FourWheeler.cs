@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessAccessLayer.Constants;
+using BusinessAccessLayer.Enums;
 
 namespace BusinessAccessLayer.TryOut_1
 {
@@ -16,8 +18,12 @@ namespace BusinessAccessLayer.TryOut_1
             }
             set
             {
-                if (value.Equals('H') || value.Equals('M') || value.Equals('L')) engineCoolantLevel = value;
-                else engineCoolantLevel = 'H';
+                if (
+                    value.Equals(FourWheelerConstants.HighEngineCoolentLevel) ||
+                    value.Equals(FourWheelerConstants.MediumEngineCoolentLevel) ||
+                    value.Equals(FourWheelerConstants.LowEngineCoolentLevel)
+                   )    engineCoolantLevel = value;
+                else engineCoolantLevel = FourWheelerConstants.HighEngineCoolentLevel;
             }
         }
         public FourWheeler()
@@ -30,8 +36,8 @@ namespace BusinessAccessLayer.TryOut_1
         }
         public bool FixEngineCoolantLevel()
         {
-            if (!(EngineCoolantLevel.Equals('H'))){
-                EngineCoolantLevel = 'H';
+            if (!(EngineCoolantLevel.Equals(FourWheelerConstants.HighEngineCoolentLevel))){
+                EngineCoolantLevel = FourWheelerConstants.HighEngineCoolentLevel;
                 return true;
             }
             return false;
@@ -41,7 +47,7 @@ namespace BusinessAccessLayer.TryOut_1
         {
             try
             {
-                if (FuelLevel + fuelVolume > 50)
+                if (FuelLevel + fuelVolume > VehicleConstants.FourWheelerMaxFuelLevel)
                     throw new Exceptions.FuelOverflowException();
                 else FuelLevel += fuelVolume;
             }
@@ -54,8 +60,11 @@ namespace BusinessAccessLayer.TryOut_1
 
         public override void UpdateVehicleStatus()
         {
-            if (!(AreBrakesWorking) || EngineCoolantLevel.Equals('L')) VehicleStatus = "Critical";
-            else VehicleStatus = "OK";
+            if (
+                !(AreBrakesWorking) ||
+                EngineCoolantLevel.Equals(FourWheelerConstants.LowEngineCoolentLevel)
+               )    VehicleStatus = VehicleStatus.Critical;
+            else VehicleStatus = VehicleStatus.OK;
         }
     }
 }

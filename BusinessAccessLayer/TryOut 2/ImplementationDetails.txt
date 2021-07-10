@@ -1,0 +1,77 @@
+﻿Note:
+
+    Implement the class diagram strictly as shown
+
+    counter in PostPaidService class is a static variable and should be initialized to 1
+
+Implement logic to achieve the below functionalities:
+
+Usage Class
+
+    Parameterized constructor must set all the properties of the Usage class                                                              
+
+Service Center Class
+
+    Parameterized constructor must set all the properties of the ServiceCenter class
+
+PostPaidService Class
+
+    Parameterized constructor
+
+        Properties Usage,PostPaidPlan and CarryForward should be set accordingly and the base class properties should be set by calling the base class constructor
+
+    ValidatePlanDetails()
+
+        Check if the PostpaidPlan is present in the availablePostPaidPlan list, and return true. Otherwise, return false
+
+    GetPhoneRates()
+
+        The values of CallRatePerMin, SmsRate, DataRate are set based on the plan chosen as follows:
+
+ 
+
+        Post Paid Plan      CallRatePerMin      SmsRate     DataRate
+        ------------------------------------------------------------------------
+        BP                  1                   0.5         250
+
+        FSP                 1.25                0           200
+
+        CP                  0.95                0.55        300
+
+        Otherwise           0                   0           0
+        ------------------------------------------------------------------------
+ 
+
+    CalculatePostPaidBill()
+
+        Invoke GetPhoneRates method. Calculate the bill based on the logic below and return the same
+
+        PostPaidPlan           Billamount to be returned
+        ---------------------------------------------------------------------------------------------------
+
+        UP                     999 - CarryForward;
+
+        For all other plans    (CallDurationInMins * CallRatePerMin ) +  
+                                (NumberOfSmsSent * SmsRate) +  (DataUsageInGB * DataRate) -  CarryForward;
+        ----------------------------------------------------------------------------------------------------
+ 
+
+    MakePayment()
+
+        Invoke the CalculatePostPaidBill method
+
+        If the amountPaid is greater than or equal to the billamount
+
+            CarryForward should be updated with difference in the billamount and the amountPaid
+
+            Bill Id must be set using the counter. The format is 'T1', 'T2' and so on.
+
+            counter should be incremented
+
+            Return 1          
+
+        If the amountPaid is less than the billamount
+
+            Bill Id must be set to ‘NA’
+
+            Return -1
