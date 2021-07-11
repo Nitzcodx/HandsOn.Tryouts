@@ -1,0 +1,77 @@
+﻿Note: 'counter' is a static member variable.
+
+ 
+
+Logic to be implemented:
+
+StudentDelegate delegate
+
+	Create a delegate named ‘StudentDelegate’ that will accept methods which have return type void and accept an object of Student class as a parameter. The delegate should be created at namespace level.
+
+Address class
+
+	Property
+
+		The automatic properties AddressLine1, AddressLine2, City should be created as per the class diagram
+
+		The value for Pincode should be between 0 and 999999 (both inclusive). Else it should be set to 570010
+
+	Parameterized Constructor
+
+		The properties AddressLine1, AddressLine2, City and Pincode should be initialized with appropriate values
+
+Student class
+
+	Property
+
+		The automatic properties CollegeFees , Gender , Marks , SportsQuota and StudentName should be created as per the class diagram
+
+	Parameterized Constructor
+
+		The properties Gender , Marks , SportsQuota and StudentName should be initialized with appropriate values
+
+College class
+
+	Property
+
+		The automatic properties CollegeId and CollegeName should be  created as shown in the class diagram
+
+	Parameterized Constructor
+
+		The CollegeId should start from 1001 and auto-incremented every time an object of the class is created. Member variable counter is used to assign a CollegeId.
+
+		The property CollegeName is set to the corresponding parameter passed in the constructor.
+
+GovtCollege class
+
+	Parameterized Constructor
+
+		The property CollegeAddress should be initialized with appropriate values and appropriate value should be sent to the base class constructor
+
+	CalculateFeesBasedOnMarks method
+
+		If the Marks of the student is greater than 80, CollegeFees should be set to 20000, else to 35000
+
+	CalculateFeesBasedOnSportsQuota method
+
+		If the student has SportsQuota, then CollegeFees should be decremented by 5000
+
+	SetFees method
+
+		Create a single StudentDelegate object
+
+		Add references of both “ CalculateFeesBasedOnMarks” and “CalculateFeesBasedOnSportsQuota” methods of GovtCollege class in the same order to the delegate object
+
+		Invoke the delegate with a student object
+
+PrivateCollege class
+
+	Parameterized Constructor
+
+		The properties PrivateCollegeAddress and Donation should be initialized with appropriate values and appropriate value should be sent to the base class constructor
+
+	CalculateFees method
+
+		If Marks is greater than 75 and Donation is greater than 100000, set CollegeFees as CollegeFees=75000-(Donation*0.5)
+
+		Else set CollegeFees to 75000
